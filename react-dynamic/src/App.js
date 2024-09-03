@@ -1,19 +1,46 @@
-import React, {useState} from 'react';
-function App (){
-  const [inputs, setInputs] =useState({});
+import React,{useState} from 'react';
+const App =()=>{
+  const [objData, setObjData] = useState({});
 
-  const getData = (data)=>{
-    let {name, value} = data.target;
-    let input = {[name]:value};
-    setInputs({...inputs, ...input})
+  const getData = (name, value)=>{
+    let data = {[name]:value};
+    setObjData({...objData,  ...data})
+  };
+
+  const submit = (event)=>{
+    event.preventDefault();
+    console.log(objData)
   }
-  console.log(inputs)
-  return(
+  return (
+    <form onSubmit={submit}>
     <div>
-      <input placeholder='Enter Name' name='name' type='text' onChange={getData} />
-      <input placeholder='Enter age' name='age' type='number' onChange={getData} />
-      <input placeholder='YOE' name='YOE' type='number' onChange={getData} />
+      <input 
+      placeholder='Enter Name' 
+      name='name' type='text' 
+      onChange={(event)=>getData(event.target.value, event.target.name)} 
+      />
+      <input 
+      placeholder='Enter Age'
+      name='name'
+      type='number'
+      onChange={(event)=>getData(event.target.value, event.target.name)}
+      />
+      <input
+      placeholder='subject'
+      name='subject'
+      type='text'
+      onChange={(event)=>getData(event.target.value, event.target.name)}
+      />
+      {/* <input 
+      placeholder='Date'
+      name='date'
+      type='date'
+      onChange={(event)=>getData(event.target.value, event.target.name)}
+      /> */}
+      <button type='submit'>Submit</button>
+      <button type='reset'>Reset</button>
     </div>
+    </form>
   )
 }
 export default App;
